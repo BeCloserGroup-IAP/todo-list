@@ -1,8 +1,8 @@
-import { db } from "../src/db/index";
-import { todos } from "../src/db/schema";
-import { eq } from "drizzle-orm";
+const { db } = require("../src/db/index");
+const { todos } = require("../src/db/schema");
+const { eq } = require("drizzle-orm");
 
-export default async function handler(req: any, res: any): Promise<void> {
+module.exports = async function handler(req, res) {
   try {
     if (req.method === "GET") {
       const rows = await db.select().from(todos).orderBy(todos.createdAt);
@@ -30,7 +30,7 @@ export default async function handler(req: any, res: any): Promise<void> {
         res.status(400).json({ error: "L'id è obbligatorio." });
         return;
       }
-      const updates: Partial<{ done: boolean; text: string }> = {};
+      const updates = {};
       if (typeof done === "boolean") updates.done = done;
       if (typeof text === "string" && text.trim()) updates.text = text.trim();
       const [row] = await db
@@ -54,7 +54,7 @@ export default async function handler(req: any, res: any): Promise<void> {
     }
 
     res.status(405).json({ error: "Metodo non consentito." });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({ error: err?.message ?? "Errore del server." });
   }
-}
+};
