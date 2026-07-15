@@ -1,5 +1,5 @@
-import { db } from "../src/db/index.js";
-import { todos } from "../src/db/schema.js";
+import { db } from "../src/db/index";
+import { todos } from "../src/db/schema";
 import { eq } from "drizzle-orm";
 
 export default async function handler(req: any, res: any): Promise<void> {
