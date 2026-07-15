@@ -1,4 +1,4 @@
 {
   "buildCommand": "npx drizzle-kit push --force",
-  "outputDirectory": "."
+  "outputDirectory": "public"
 }
